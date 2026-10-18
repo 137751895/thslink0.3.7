@@ -371,7 +371,7 @@ DLL 请求结果记录最多 2000 笔；容量不足时只回收已确认或人�
 
 普通双击 `thslink.exe` 使用无边框窗口。虚拟机或远程桌面出现黑屏时，先退出 ThsLink，再双击同目录 `兼容运行.bat`；也可执行 `thslink.exe --compat-window`，使用系统标题栏窗口。
 
-主动查询应同时检查 `status`、`complete` 和各账户的 `error`。`status=unchanged` 表示同花顺这次没有发布新的结果快照（内部标记为 `#noup#`、返回码为 8），不能解释为没有委托，也不能沿用旧表；可重新发起查询。HTTP 502 仍表示真正的查询失败。
+主动查询应同时检查 `status`、`complete` 和各账户的 `error`。`status=unchanged` 表示同花顺这次没有提供新的结果，不能解释为没有委托，也不能沿用旧表；可重新发起查询。HTTP 502 仍表示真正的查询失败。
 
 需要排查时，在程序与 DLL 所在目录创建 `diagnostics/enabled` 空文件，重试查询后查看 `diagnostics/query.log`。结束诊断后删除 `enabled` 即可关闭记录。诊断目录和日志不随正式包分发。
 
