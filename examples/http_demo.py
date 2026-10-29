@@ -6,7 +6,7 @@ import atexit
 import requests
 
 BASE = "http://127.0.0.1:8421"
-HEADERS = {}  # 配置密钥时填写 {"X-API-Key": "你的密钥"}
+HEADERS = {"X-API-Key": "填入设置中的密码"}  # 仅手动关闭密码验证后才可改为 {}
 # 只初始化一次。下单、查询和轮询共用此客户端；多线程请每线程各保留一个。
 SESSION = requests.Session()
 atexit.register(SESSION.close)
@@ -77,9 +77,11 @@ def batch_result(batch_id):
     return get(f"/batches/{batch_id}")
 
 
-def query(kind, account="current", wait_ms=2000):
-    """主动查询：holdings / orders / deals / funds；pending 时查原 query_id。"""
-    return post("/query", {"kind": kind, "account": account, "wait_ms": wait_ms})
+def query(kind, account="current", wait_ms=2000, mode="ordinary"):
+    """mode 手选 ordinary 普通 / credit 信用；pending 时查原 query_id，不自动切换。"""
+    if mode not in ("ordinary", "credit"):
+        raise ValueError("mode 只能是 ordinary 或 credit")
+    return post("/query", {"kind": kind, "account": account, "wait_ms": wait_ms, "mode": mode})
 
 
 def query_result(query_id):
