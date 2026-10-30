@@ -33,8 +33,10 @@ def _trading_payload(payload):
     return payload
 
 
-def order(side, code, price=None, amount=None, **flags):
-    payload = {"side": side, "code": code}
+def order(side, code=None, price=None, amount=None, **flags):
+    payload = {"side": side}
+    if code is not None:
+        payload["code"] = code
     if price is not None:
         payload["price"] = str(price)
     if amount is not None:
@@ -61,6 +63,13 @@ def cancel(code="all", **flags):
 
 def cancel_all(**flags):
     return cancel("all", **flags)
+
+
+def cancel_contract(contract, **flags):
+    """单个合同号撤单，字符串保留前导零；信用账户传 xytype=1, module="pyd"。"""
+    if not isinstance(contract, str) or not contract or not contract.isascii() or not contract.isdigit():
+        raise ValueError("contract 须为单个纯数字合同号字符串")
+    return order("cancel", contract=contract, **flags)
 
 
 def batch(orders):
@@ -107,6 +116,8 @@ def last():
 #     {"side":"buy","code":"600000","price":"mrxjg","cw":"1/10","notip":True},
 # ])
 # print(batch_result(result["batch_id"]))
+# 按合同号撤单：cancel_contract("00123456", account="实际已登录账号")
+# 信用合同撤单：cancel_contract("00123456", xytype=1, module="pyd")
 # 等待中继续查询原编号，勿直接重发；需要归档的日志由调用程序保存。
 
 if __name__ == "__main__":
