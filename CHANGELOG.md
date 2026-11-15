@@ -13,7 +13,7 @@
 
 - `thslink-windows.zip`：ThsLink 桌面版。
 - `ThsLink-Cli-windows.zip`：ThsLink 纯 HTTP 接口版。
-- `同花顺独立交易-2023.03.30.0.zip`：独立交易端，已清除原包内的历史账号标识；解压后运行 `xiadan.exe` 并登录，再启动 ThsLink。
+- `ths-trading-2023.03.30.0.zip`：同花顺独立交易端，已清除原包内的历史账号标识；解压后运行 `xiadan.exe` 并登录，再启动 ThsLink。
 - `SHA256SUMS.txt`：发布附件的 SHA-256 校验值。
 
 已有受支持交易端的用户无需更换交易端。ThsLink 主程序、DLL 和加载器必须配套使用：保存配置并核对未确认请求后，退出旧版 ThsLink 和同花顺交易端，整体替换程序目录，再重新启动。不要只替换 EXE。桌面个人配置保留；纯接口版升级时请保留自己的 `http-config.json`。
