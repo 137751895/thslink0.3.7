@@ -1,3 +1,22 @@
+# ThsLink v0.3.8
+
+修复同花顺官方独立下单 `2023.03.30.0` 在部分电脑上误报内部接口不兼容、无法连接的问题。桌面版与纯接口版同步更新。
+
+使用 v0.3.7 时，如果交易端文件正确，却出现 `cache_map_hash` 或 `query_property_map_hash` 校验不匹配，请升级到本版。本次修正兼容性校验，不需要重新下载同花顺交易端。
+
+## 下载与升级
+
+- `thslink-windows.zip`：ThsLink 桌面版。
+- `ThsLink-Cli-windows.zip`：ThsLink 纯 HTTP 接口版。
+- `ths-trading-2023.03.30.0.7z`：同花顺独立交易端；解压后运行 `xiadan.exe` 并登录，再启动 ThsLink。
+- `SHA256SUMS.txt`：发布附件的 SHA-256 校验值。
+
+退出旧版 ThsLink 和同花顺交易端，整体替换 ThsLink 程序包后重新启动。主程序、DLL 和加载器须配套使用。桌面配置保留；纯接口版升级时请保留自己的 `http-config.json`。
+
+此前的查询、缓存标记、DLL 自动恢复及交易结果跟踪行为保持不变。官方独立下单版的实际买卖、撤单、账户切换和信用业务尚未现场验收。
+
+详细接口见 [HTTP 使用说明](https://github.com/electkismet/thslink/blob/main/docs/HTTP.md)，纯接口版的启动与设置见 [纯接口版说明](https://github.com/electkismet/thslink/blob/main/docs/CLI.md)。
+
 # ThsLink v0.3.7
 
 新增同花顺官方独立下单 `2023.03.30.0` 兼容，并补齐该版普通委托、成交查询的原生缓存展示。桌面版与纯接口版同步更新，原有交易端兼容、DLL 自动恢复和交易记录保留。
